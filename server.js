@@ -23,20 +23,26 @@ app.get('/', (req, res) => {
         edad: 32,
         url: req.url};*/
 
-    res.render('home', {
-        name: 'fernando'
+    res.render('parciales/noticias_inicio', {
+        //name: 'fernando'
     });
 });
-
+/*
 app.get('/about', (req, res) => {
 
     res.render('parciales/about');
 
 });
-
+*/
 app.get('/vista_noticia', (req, res) => {
 
     res.render('parciales/vista_noticia');
+
+});
+
+app.get('/publicar_noticia', (req, res) => {
+
+    res.render('parciales/publicar_noticia');
 
 });
 
