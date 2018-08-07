@@ -38,8 +38,9 @@ app.get('/', (req, res) => {
 
     res.render('parciales/noticias_inicio', {
         //name: 'fernando'
-        titular: ' ',
-        imagen: ''
+        titular: ' Titular de la noticia +__+',
+        imagen: '',
+        autor: 'Este tipo publicó *==*'
     });
 });
 /*
@@ -51,7 +52,12 @@ app.get('/about', (req, res) => {
 */
 app.get('/vista_noticia', (req, res) => {
 
-    res.render('parciales/vista_noticia');
+    res.render('parciales/vista_noticia', {
+        titular: ' Titular de la noticia +__+',
+        cuerpoNoticia: 'Se supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.',
+        imagen: '',
+        autor: 'Este tipo publicó *==*'
+    });
 
 });
 
