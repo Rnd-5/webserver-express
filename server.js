@@ -1,3 +1,4 @@
+//====================REQUIRES_Y_CONST====================//
 const express = require('express');
 const app = express();
 
@@ -14,8 +15,9 @@ app.use(express.static(__dirname + '/public'));
 hbs.registerPartials(__dirname + '/views/parciales')
 app.set('view engine', 'hbs');
 
+//=============================================================//
 
-
+//========================PETICIONES_GET======================//
 app.get('/', (req, res) => {
     /* res.send('Hello World');
     let salida = {
@@ -25,6 +27,8 @@ app.get('/', (req, res) => {
 
     res.render('parciales/noticias_inicio', {
         //name: 'fernando'
+        titular: ' ',
+        imagen: ''
     });
 });
 /*
@@ -53,6 +57,17 @@ app.get('/data', (req, res) => {
 
 });
 */
+//=============================================================//
+
+//========================PETICIONES_POST======================//
+
+
+
+
+
+//=============================================================//
+
+
 
 app.listen(port, () => {
     console.log(`Escuchando petisiones en el puerto ${ port }.`);
