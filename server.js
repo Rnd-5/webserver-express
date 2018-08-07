@@ -8,6 +8,7 @@ const hbs = require('hbs');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const port = process.env.PORT || 3000;
+const Noticia = require('./models/modelo_noticia')
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -29,6 +30,12 @@ mongoose.connect('mongodb://localhost:27017/BD_Noticias_com', (err, res) => {
 });
 
 //========================PETICIONES_GET======================//
+
+noticias = [{ 'titular': 'Titular_1', 'imagen': '', 'autor': 'Autor_1 publicó *==*' },
+    { 'titular': 'Titular_2', 'imagen': '', 'autor': 'Autor_2 publicó *==*' },
+    { 'titular': 'Titular_3', 'imagen': '', 'autor': 'Autor_3 publicó *==*' }
+]
+
 app.get('/', (req, res) => {
     /* res.send('Hello World');
     let salida = {
@@ -77,6 +84,38 @@ app.get('/data', (req, res) => {
 app.get('/publicar_noticia', function(req, res) {
 
     res.render('parciales/formulario_noticia');
+
+});
+
+
+app.post('/publicar_noticia', function(req, res) {
+
+    let body = req.body;
+
+    let noticia = new Noticia({
+        titular: body.titular,
+        cuerpoNoticia: body.cuerpoNoticia,
+        autor: body.autor
+    });
+
+
+    noticia.save((err, noticiaDB) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err: err
+            });
+        }
+
+        //usuarioDB.password = null;
+
+        res.json({
+            ok: true,
+            noticia: noticiaDB
+        });
+
+
+    });
 
 });
 
