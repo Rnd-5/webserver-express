@@ -1,8 +1,23 @@
 {{> head }}
 {{> navbar }}
-
-
-<div class="form-group" style="width: 50%; margin-right:auto;  margin-left: auto;  padding-top: 50px;">
+<!--
+    <form method="post">
+        <div>
+            <label for="">Titular:</label>
+            <input type="text" name="titular" id="" required="">
+        </div>
+        <div>
+            <label for="">Cuerpo de la noticia:</label>
+            <input type="text" name="cuerpoNoticia" id="" required="">
+        </div>
+        <div>
+            <label for="">Autor:</label>
+            <input type="text" name="autor" id="" required="">
+        </div>
+        <input type="submit" value="Publicar" class="">
+    </form>
+-->
+    <div class="form-group" style="width: 50%; margin-right:auto; margin-left: auto; padding-top: 50px;">
       <label for="" style="color: #343a40;">Titular:</label>
       <input type="text|password|email|number|submit|date|datetime|datetime-local|month|color|range|search|tel|time|url|week"
         class="form-control" name="titular" id="" aria-describedby="helpId" placeholder="">
@@ -13,16 +28,16 @@
         class="form-control" name="cuerpoNoticia" id="" aria-describedby="helpId" placeholder="">
         </textarea>
       <small id="helpId" class="form-text text-muted">Contenido de la noticia.</small>
-    <!--
+      <hr>
       <label for="" style="color: #343a40;">Autor de la noticia:</label>
       <input type="text|password|email|number|submit|date|datetime|datetime-local|month|color|range|search|tel|time|url|week"
         class="form-control" name="autor" id="" aria-describedby="helpId" placeholder="">
       <small id="helpId" class="form-text text-muted">Nombre de la persona que publica esta noticia.</small>  
-    -->
-    <hr>
-      <button type="button" class="btn btn-large btn-block btn-primary" style="background-color: #343a40;">Listo</button>
+      <hr>
+      <button type="button" class="btn btn-large btn-block btn-primary" style="background-color: #343a40;">Publicar</button>
       
     </div>
+
 
 
 {{> footer }}
