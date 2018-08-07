@@ -34,6 +34,12 @@ app.get('/about', (req, res) => {
 
 });
 
+app.get('/vista_noticia', (req, res) => {
+
+    res.render('parciales/vista_noticia');
+
+});
+
 /*
 app.get('/data', (req, res) => {
 
