@@ -46,7 +46,6 @@ app.get('/', (req, res) => {
     });*/
 });
 
-
 app.get('/vista_noticia/:id', (req, res) => {
     /*
         mongoose.model('Noticia').find(function(err, Noticia) {
@@ -167,7 +166,7 @@ app.post('/publicar_noticia', function(req, res) {
 
         //usuarioDB.password = null;
 
-        res.render('parciales/noticias_inicio');
+        res.redirect('/');
 
 
 
@@ -181,9 +180,30 @@ app.post('/publicar_noticia', function(req, res) {
 //========================PETICIONES_PUT======================//
 
 app.get('/editar_noticia', function(req, res) {
+    /*
+        let id = req.params.id;
+        let body = req.body;
 
-    res.render('parciales/editar_noticia');
+        Noticia.findById(id, body, (err, noticiaDB) => {
 
+            if (err) {
+                return res.status(400).json({
+                    ok: false,
+                    err: err
+                });
+            }
+            result = {
+                titular: noticiaDB.titular, //' Titular de la noticia +__+',
+                cuerpoNoticia: noticiaDB.cuerpoNoticia, //'Se supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.',
+                imagen: '',
+                autor: noticiaDB.autor //'Este tipo publicó *==*'
+            };
+            res.render('parciales/editar_noticia', result)
+        });
+
+
+        //res.render('parciales/editar_noticia');
+    */
 
 });
 
@@ -212,7 +232,29 @@ app.put('/editar_noticia/:id', function(req, res) {
 
 
 //========================PETICIONES_DELETE====================//
+/*
+app.delete('/delete/:id', (req, res) => {
+    let id = req.params.id;
 
+    Noticia.findByIdAndRemove(id);
+})*/
+
+app.get('/delete/:id', (req, res) => {
+
+    let id = req.params.id;
+
+    Noticia.findByIdAndUpdate(id, { estado: false }, { new: true }, (err, noticiaDB) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err: err
+            });
+        }
+    });
+    res.redirect('/')
+
+
+});
 
 //=============================================================//
 

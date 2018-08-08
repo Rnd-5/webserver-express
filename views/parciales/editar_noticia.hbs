@@ -2,15 +2,17 @@
 {{> navbar }}
 
 <h1 style="color: #343a40; text-align: center;">Editar noticia</h1>
-<div class="form-group" style="width: 50%; margin-right:auto;  margin-left: auto;  padding-top: 50px;">
+<form action="/editar_noticia/" method="post">
+    <div class="form-group" style="width: 50%; margin-right:auto;  margin-left: auto;  padding-top: 50px;">
+      <small class="text-muted">Autor: {{autor}}</small>
       <label for="" style="color: #343a40;">Titular:</label>
       <input type="text|password|email|number|submit|date|datetime|datetime-local|month|color|range|search|tel|time|url|week"
-        class="form-control" name="titular" id="" aria-describedby="helpId" placeholder="">
+        class="form-control" name="titular" id="" aria-describedby="helpId" placeholder="" value="{{titular}}">
       <small id="helpId" class="form-text text-muted">Titular de la noticia.</small>
       <hr>
       <label for="" style="color: #343a40;">Cuerpo de la noticia:</label>
       <textarea type="text|password|email|number|submit|date|datetime|datetime-local|month|color|range|search|tel|time|url|week"
-        class="form-control" name="cuerpoNoticia" id="" aria-describedby="helpId" placeholder="">
+        class="form-control" name="cuerpoNoticia" id="" aria-describedby="helpId" placeholder="">{{cuerpoNoticia}}
         </textarea>
       <small id="helpId" class="form-text text-muted">Contenido de la noticia.</small>
     <!--
@@ -19,10 +21,14 @@
         class="form-control" name="autor" id="" aria-describedby="helpId" placeholder="">
       <small id="helpId" class="form-text text-muted">Nombre de la persona que publica esta noticia.</small>  
     -->
-    <hr>
-      <button type="button" class="btn btn-large btn-block btn-primary" style="background-color: #343a40;">Listo</button>
+      <hr>
+      <input type="submit" class="btn btn-large btn-block btn-primary" style="background-color: #343a40;" value="Listo">
       
     </div>
+  </form>
+
+
+
 
 
 {{> footer }}
