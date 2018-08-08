@@ -7,8 +7,11 @@ const app = express();
 const hbs = require('hbs');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const port = process.env.PORT || 3000;
 
+const noticiaForm = (require, './routes/noticiaForm');
+
+const port = process.env.PORT || 3000;
+//------------------------------------------------//
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
     // parse application/json
@@ -20,7 +23,10 @@ app.use(express.static(__dirname + '/server/static'));
 hbs.registerPartials(__dirname + '/views/parciales')
 app.set('view engine', 'hbs');
 
-app.use(require('./routes/rutas_noticia'))
+app.use(require('./routes/rutas_noticia'));
+
+//app.use('/noticiaForm', noticiaForm);
+
 
 //=============================================================//
 
