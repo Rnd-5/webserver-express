@@ -167,10 +167,8 @@ app.post('/publicar_noticia', function(req, res) {
 
         //usuarioDB.password = null;
 
-        res.json({
-            ok: true,
-            noticia: noticiaDB
-        });
+        res.render('parciales/noticias_inicio');
+
 
 
     });
