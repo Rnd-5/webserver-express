@@ -76,10 +76,11 @@ app.get('/vista_noticia/:id', (req, res) => {
         }
 
         result = {
-            titular: noticiaDB.titular, //' Titular de la noticia +__+',
-            cuerpoNoticia: noticiaDB.cuerpoNoticia, //'Se supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.',
+            titular: noticiaDB.titular,
+            cuerpoNoticia: noticiaDB.cuerpoNoticia,
             imagen: '',
-            autor: noticiaDB.autor //'Este tipo publicó *==*'
+            autor: noticiaDB.autor,
+            fechaPublicacion: noticiaDB.fechaPublicacion
         };
 
         res.render('parciales/vista_noticia', result)
@@ -135,10 +136,12 @@ app.post('/publicar_noticia', function(req, res) {
     let noticia = new Noticia({
         titular: body.titular,
         cuerpoNoticia: body.cuerpoNoticia,
-        autor: body.autor
+        autor: body.autor,
+        clave: body.clave
     });
 
     noticia.save((err, noticiaDB) => {
+
         if (err) {
             return res.status(400).json({
                 ok: false,
@@ -173,7 +176,8 @@ app.get('/editar_noticia/:id', function(req, res) {
             titular: noticiaDB.titular, //' Titular de la noticia +__+',
             cuerpoNoticia: noticiaDB.cuerpoNoticia, //'Se supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.',
             imagen: '',
-            autor: noticiaDB.autor //'Este tipo publicó *==*'
+            autor: noticiaDB.autor,
+            clave: noticiaDB.clave
         };
 
         res.render('parciales/editar_noticia', result)
@@ -210,16 +214,28 @@ app.post('/editar_noticia/:id', function(req, res) {
     let id = req.params.id;
     let body = req.body;
 
-    Noticia.findByIdAndUpdate(id, body, { new: true }, (err, noticiaDB) => {
-        if (err) {
-            return res.status(400).json({
-                ok: false,
-                err: err
+    Noticia.findById(id, (err, noticiaDB) => {
+        if (body.clave === noticiaDB.clave) {
+
+            Noticia.findByIdAndUpdate(id, body, { new: true }, (err, noticiaDB) => {
+                if (err) {
+                    return res.status(400).json({
+                        ok: false,
+                        err: err
+                    });
+                }
+
+                res.redirect('/');
             });
+
+        } else {
+            res.redirect(`/editar_noticia/${id}`);
         }
 
-        res.redirect('/');
     });
+
+
+
 });
 //=============================================================//
 
@@ -236,6 +252,9 @@ app.get('/delete/:id', (req, res) => {
 
     let id = req.params.id;
 
+    let x = Noticia.findById(id);
+
+
     Noticia.findByIdAndUpdate(id, { estado: false }, { new: true }, (err, noticiaDB) => {
         if (err) {
             return res.status(400).json({
@@ -243,7 +262,9 @@ app.get('/delete/:id', (req, res) => {
                 err: err
             });
         }
+
     });
+    x.estado = false;
     res.redirect('/')
 });
 //=============================================================//

@@ -15,10 +15,14 @@
       class="form-control" name="cuerpoNoticia" id="" aria-describedby="helpId" placeholder="">{{cuerpoNoticia}}
       </textarea>
     <small id="helpId" class="form-text text-muted">Contenido de la noticia.</small>
-
     <hr>
-    <input type="submit" class="btn btn-large btn-block btn-primary" style="background-color: #343a40;" value="Listo" src="/editar_noticia/{{id}}">
-    
+    <label for="" style="color: #343a40;">Clave de noticia:</label>
+    <input type="password" class="form-control" name="clave" id="" aria-describedby="helpId" placeholder="" value="" required="required">
+    <hr>
+    {{#if clave}}
+    <input type="submit" class="btn btn-large btn-block btn-primary" style="background-color: #343a40; width: 50%; float: left;" value="Listo" src="/editar_noticia/{{id}}">
+    <input type="submit" class="btn btn-large btn-block btn-primary" style="background-color: #c0392b ; width: 50%;" value="Eliminar" src="/delete/{{id}}">
+    {{/if}}
   </div>
 </form>
 

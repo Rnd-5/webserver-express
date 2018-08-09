@@ -24,6 +24,15 @@ let noticiaSchema = new Schema({
         type: Boolean,
         default: true
     },
+    clave: {
+        type: String,
+        required: [true, 'La clave es necesaria']
+    },
+    fechaPublicacion: {
+        type: Date,
+        default: Date.now
+    }
+
 });
 
 
