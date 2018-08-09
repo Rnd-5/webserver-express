@@ -173,15 +173,14 @@ app.get('/editar_noticia/:id', function(req, res) {
 
         result = {
             id: noticiaDB.id,
-            titular: noticiaDB.titular, //' Titular de la noticia +__+',
-            cuerpoNoticia: noticiaDB.cuerpoNoticia, //'Se supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.\nSe supone que este es el cuerpo de la noticia que quieres ver pero, soy solo un ejemplo para que el espacio no esté vacio.',
+            titular: noticiaDB.titular,
+            cuerpoNoticia: noticiaDB.cuerpoNoticia,
             imagen: '',
             autor: noticiaDB.autor,
             clave: noticiaDB.clave
         };
 
         res.render('parciales/editar_noticia', result)
-
     });
 
     /*
@@ -248,12 +247,33 @@ app.delete('/delete/:id', (req, res) => {
     Noticia.findByIdAndRemove(id);
 })*/
 
-app.get('/delete/:id', (req, res) => {
+app.get('/opt_delete/:id', (req, res) => {
 
     let id = req.params.id;
+    let body = req.body;
 
-    let x = Noticia.findById(id);
+    Noticia.findById(id, body, (err, noticiaDB) => {
 
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err: err
+            });
+        }
+
+        result = {
+            id: noticiaDB.id,
+            titular: noticiaDB.titular,
+            cuerpoNoticia: noticiaDB.cuerpoNoticia,
+            imagen: '',
+            autor: noticiaDB.autor,
+            clave: noticiaDB.clave
+        };
+
+        res.render('parciales/eliminar_noticia', result)
+    });
+
+    /*let id = req.params.id;
 
     Noticia.findByIdAndUpdate(id, { estado: false }, { new: true }, (err, noticiaDB) => {
         if (err) {
@@ -262,11 +282,34 @@ app.get('/delete/:id', (req, res) => {
                 err: err
             });
         }
-
     });
-    x.estado = false;
-    res.redirect('/')
+    res.redirect('/')*/
 });
+
+app.post('/delete/:id', (req, res) => {
+    let id = req.params.id;
+    let body = req.body;
+    Noticia.findById(id, (err, noticiaDB) => {
+        if (body.clave === noticiaDB.clave) {
+
+            Noticia.findByIdAndUpdate(id, { estado: false }, { new: true }, (err, noticiaDB) => {
+                if (err) {
+                    return res.status(400).json({
+                        ok: false,
+                        err: err
+                    });
+                }
+            });
+            res.redirect('/');
+
+        } else {
+            console.log('NO SE INTRODUJO LA CLAVE, O AL MENOS NO LA CORRECTA');
+            res.redirect(`/editar_noticia/${id}`);
+        }
+    });
+
+});
+
 //=============================================================//
 
 

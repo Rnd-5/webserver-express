@@ -1,0 +1,21 @@
+{{> head }}
+{{> navbar }}
+
+<h1 style="color: #343a40; text-align: center;">Está seguro de eliminar la noticia:</h1>
+<h3 style="color: #343a40; text-align: center;">{{titular}}</h3>
+<form action="/delete/{{id}}" method="post">
+  <div class="form-group" style="width: 50%; margin-right:auto;  margin-left: auto;  padding-top: 50px;">
+    <hr>
+    <label for="" style="color: #343a40;">Clave de noticia:</label>
+    <input type="password" class="form-control" name="clave" id="" aria-describedby="helpId" placeholder="" value="" required="required">
+    <hr>
+    <input type="submit" class="btn btn-large btn-block btn-primary" style="background-color: #c0392b ; width: 100%;" value="Si (Eliminar)" src="/delete/{{id}}">
+    
+  </div>
+  </form>
+
+
+
+
+
+{{> footer }}
